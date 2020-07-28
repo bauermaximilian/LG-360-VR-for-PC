@@ -24,7 +24,7 @@ A working development build of the LG360VRActivator and the LGVR4VLC shader scri
 ## Overview
 
 1. Follow the instructions in the [LG360VRActivator](LG360VRActivator) subfolder (and probably do some additional research on Google) to get the headset running
-2. Configure your VLC player (with the instructions in the [LGVR4VLC](LGVR4VLC) subfolder) to watch movies on the VR headset
+2. Configure your VLC player (with the instructions in the [LGVR4VLC](LGVR4VLC) subfolder) to watch movies or display desktop applications on the VR headset
 3. ???
 4. Profit
 
