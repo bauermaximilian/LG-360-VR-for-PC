@@ -51,7 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LICENSE.txt" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Readme.md" />
