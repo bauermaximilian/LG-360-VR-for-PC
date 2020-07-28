@@ -19,6 +19,8 @@ Oh yeah, and if you're from LG and don't like what I did here, please don't sue 
 - [VLC media player](https://www.videolan.org/) and the shader script in the subfolder "[LGVR4VLC](LGVR4VLC)"
 - **Lots of patience** and knowledge about how to use command line applications and how to install drivers
 
+A working development build of the LG360VRActivator and the LGVR4VLC shader script can also be downloaded [here](https://github.com/bauermaximilian/LG-360-VR-for-PC/releases/download/0.0.1/LG-360-VR-for-PC_DevBuild_2020-07-28.zip).
+
 ## Overview
 
 1. Follow the instructions in the [LG360VRActivator](LG360VRActivator) subfolder (and probably do some additional research on Google) to get the headset running
