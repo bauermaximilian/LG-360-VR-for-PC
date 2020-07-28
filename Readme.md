@@ -13,7 +13,7 @@ Oh yeah, and if you're from LG and don't like what I did here, please don't sue 
 - **Windows** (I developed and tested it with Windows 10)
 - **An LG 360 VR headset**
 - **An USB-C 3.1 connector on your PC/Laptop that has DisplayPort support** (so it can output video)
-  I bought an extension PCI card for that, as my PC had an USB-C port on the front, but that didn't support video output. My tablet (Galaxy Book) has an USB-C 3.1 connector with video output support, but didn't recognize the glasses in 90% of the time, so it's kind of a gamble
+  I bought an extension PCI card for that and it works great - my PC did have an USB-C port on the front, but that didn't support video output. My tablet (Samsung Galaxy Book) has an USB-C 3.1 connector with video output support, but didn't recognize the glasses in 90% of the time... so it's kind of a gamble
 - **[Zadig](https://zadig.akeo.ie/)** (free, required so that this tool can actually "talk" to the device)
 - The **built executable** of the [LG360VRActivator](LG360VRActivator) project in the subfolder of this repository
 - [VLC media player](https://www.videolan.org/) and the shader script in the subfolder "[LGVR4VLC](LGVR4VLC)"
