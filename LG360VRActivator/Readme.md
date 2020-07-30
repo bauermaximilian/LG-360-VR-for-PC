@@ -17,7 +17,8 @@ A fancy and feature-rich program that enables you to use that headset for video 
    2.3. Select "WinUSB" (tested with v6.1.7600.16385, but later versions should work as well) as driver
    2.4. Click on "Replace Driver" and wait until it finished successfully
 3. Download a pre-compiled [release](https://github.com/bauermaximilian/LG-360-VR-for-PC/releases/) or build the project by yourself
-4. Run ```"LG360VRActivator.exe"```.
+4. Put down the glasses and don't move them.
+5. Run ```"LG360VRActivator.exe"``` and wait.
 
 If you're lucky, the display should turn on after a second or two - depending on your display configuration, it might still be black (but a different black than before, like... not pitch black, but the black of a screen which is turned on but doesn't have an image to display yet). So the next step is to go to your display settings, extend your desktop to that new screen (make sure to pick the correct resoultion of 1440x960) and then you should see your desktop background (cut and flipped) in the glasses.
 
