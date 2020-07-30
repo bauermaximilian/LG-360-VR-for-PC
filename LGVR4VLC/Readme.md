@@ -15,3 +15,7 @@ Alternatively, this could also be used to display your desktop (and applications
 ## Known issues
 
 This script was created in one evening without prior knowledge about how to create HLSL scripts for VLC - so consider it experimental. One issue I experienced that sometimes, when switching to another video, the image freezes and doesn't change anymore. For now, this can be solved by just restarting the VLC player.
+
+## License
+
+This shader script is, just like the whole repository, licensed under the MIT license.
