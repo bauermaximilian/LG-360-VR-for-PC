@@ -2,6 +2,7 @@
 using LibUsbDotNet.Main;
 using System;
 using System.Text;
+using System.Threading;
 
 namespace LG360VRActivator
 {
@@ -17,45 +18,13 @@ namespace LG360VRActivator
         /// </summary>
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+
             Console.WriteLine("=======================");
             Console.WriteLine("=  LG360VR Activator  =");
             Console.WriteLine("=======================");
             Console.WriteLine();
-
-            // Check if any command line parameters are provided and assign the
-            // command to be sent to the device accordingly (or just print out
-            // some information and terminate).
-            byte[] currentCommand;
-
-            if (args.Length == 0)
-            {
-                Console.WriteLine("Hint: Use /help for additional commands.");
-                Console.WriteLine();
-
-                currentCommand = BuildCommand("VR App Start");
-            }
-            else if (args.Length > 0 && args[0].ToLower() == "/help")
-            {
-                Console.WriteLine("/help:     This information.");
-                Console.WriteLine("/reboot:   Attempt to reboot the device.");
-                Console.WriteLine("/alwayson: Disable sleep mode of device.");
-                Console.WriteLine("Default:   Activate device/display.");
-                return;
-            }
-            else if (args.Length > 0 && args[0].ToLower() == "/reboot")
-            {
-                currentCommand = BuildCommand("Reboot");
-            }
-            else if (args.Length > 0 && args[0].ToLower() == "/alwayson")
-            {
-                currentCommand = BuildCommand("Sleep Disable");
-            } 
-            else
-            {
-                Console.WriteLine("Error: Invalid command.");
-                Console.WriteLine("See /help for valid commands.");
-                return;
-            }
 
             // Attempt to open the device using its VID/PID.
             Console.WriteLine("Searching for device...");
@@ -69,6 +38,7 @@ namespace LG360VRActivator
             }
             catch (Exception exc)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error: The device couldn't be opened ("
                     + exc.Message + ").");
                 Console.WriteLine("Please make sure the device is " +
@@ -79,34 +49,68 @@ namespace LG360VRActivator
                 return;
             }
 
-            Console.WriteLine("Device found! Sending command to device...");
+            Console.WriteLine("Device found! Attempting to enable display...");
 
-            // Send the command to the device and close the application.
             try
             {
-                ErrorCode errorCode;
+                ErrorCode code;
+
+                // First, listen to everything the device has to say.
+                // As it turns out, if we're not gonna do that, the device 
+                // will pout and refuse to listen to what we have to say.
+                byte[] buffer = new byte[1024];
+                using (UsbEndpointReader reader =
+                    device.OpenEndpointReader(ReadEndpointID.Ep01))
+                {
+                    int readCount;
+                    do { code = reader.Read(buffer, 1000, out readCount); }
+                    while (readCount > 0);
+                }
+
+                if (code != ErrorCode.Success && code != ErrorCode.IoTimedOut)
+                    throw new Exception("Transfer read error '" +
+                        code.ToString() + "'");
+
+                // After reading everything what we could from the device, we
+                // will send commands to both disable the proximity sensor and
+                // then turn on the displays. After this, the display should
+                // be turned on.
                 using (UsbEndpointWriter writer =
                     device.OpenEndpointWriter(WriteEndpointID.Ep01))
-                    errorCode = writer.Write(currentCommand, 2000, out _);
-
-                device.Close();
-
-                if (errorCode != ErrorCode.Success)
-                    throw new Exception("Transfer error '" +
-                        errorCode.ToString() + "'");
+                {
+                    code = writer.Write(BuildCommand("Sleep Disable"), 
+                        1000, out _);
+                    if (code != ErrorCode.Success)
+                        throw new Exception("Transfer write error '" +
+                            code.ToString() + "'");
+                    code = writer.Write(BuildCommand("VR App Start"), 
+                        2000, out _);
+                    if (code != ErrorCode.Success)
+                        throw new Exception("Transfer write error '" +
+                            code.ToString() + "'");
+                    writer.Flush();
+                }
             }
             catch (Exception exc)
             {
-                Console.WriteLine("Error: The command couldn't be sent ("
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Error: Communication failure ("
                     + exc.Message + ").");
                 Console.WriteLine("Any key to exit.");
                 Console.ReadKey(true);
                 return;
+            } 
+            finally
+            {
+                device.Close();
             }
 
-            Console.WriteLine("Command sent successfully.");
-            Console.WriteLine("Any key to exit.");
-            Console.ReadKey(true);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Process completed - the display should " +
+                "now be turned on.");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Program will close in 2 seconds.");
+            Thread.Sleep(2000);
             return;
         }
 
