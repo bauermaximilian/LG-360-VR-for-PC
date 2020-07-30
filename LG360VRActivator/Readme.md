@@ -12,10 +12,10 @@ A fancy and feature-rich program that enables you to use that headset for video 
 
 1. Plug in your headset
 2. Download and open [Zadig](https://zadig.akeo.ie/) 
-   2.1. Under "Options", check "List All Devices"
-   2.2. Select "LGE Custom Human interface" from the dropdown list below
-   2.3. Select "WinUSB" (tested with v6.1.7600.16385, but later versions should work as well) as driver
-   2.4. Click on "Replace Driver" and wait until it finished successfully
+  * Under "Options", check "List All Devices"
+  * Select "LGE Custom Human interface" from the dropdown list below
+  * Select "WinUSB" (tested with v6.1.7600.16385, but later versions should work as well) as driver
+  * Click on "Replace Driver" and wait until it finished successfully
 3. Download a pre-compiled [release](https://github.com/bauermaximilian/LG-360-VR-for-PC/releases/) or build the project by yourself
 4. Put down the glasses and don't move them.
 5. Run ```"LG360VRActivator.exe"``` and wait.
