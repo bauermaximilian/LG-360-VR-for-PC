@@ -34,7 +34,7 @@ namespace LG360VRActivator
                 device = UsbDevice.OpenUsbDevice(
                     new UsbDeviceFinder(DeviceVID, DevicePID));
                 if (device == null)
-                    throw new Exception("Device not found.");
+                    throw new Exception("Device not found");
             }
             catch (Exception exc)
             {
@@ -43,7 +43,8 @@ namespace LG360VRActivator
                     + exc.Message + ").");
                 Console.WriteLine("Please make sure the device is " +
                     "connected and its default drivers have been replaced " +
-                    "with current WinUSB drivers (>=6.1).");
+                    "with WinUSB drivers (>=6.1).");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Any key to exit.");
                 Console.ReadKey(true);
                 return;
@@ -96,6 +97,7 @@ namespace LG360VRActivator
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error: Communication failure ("
                     + exc.Message + ").");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Any key to exit.");
                 Console.ReadKey(true);
                 return;
